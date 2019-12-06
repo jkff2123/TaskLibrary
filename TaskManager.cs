@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using System.Threading;
 using System.Linq;
 
 namespace TaskLibrary
@@ -36,17 +35,24 @@ namespace TaskLibrary
         /// <param name="newTask">New task item</param>
         public void AddTask(Task newTask)
         {
-            if (newTask.Status == TaskStatus.Created)
+            try
             {
-                newTask.Start();
+                if (newTask.Status != TaskStatus.Running)
+                {
+                    newTask.Start();
+                }
+
+                tasks.Add(newTask);
+
+                if (!isRunning)
+                {
+                    isRunning = true;
+                    CheckTask();
+                }
             }
-
-            tasks.Add(newTask);
-
-            if(!isRunning)
+            catch
             {
-                isRunning = true;
-                CheckTask();
+                throw;
             }
         }
 
@@ -66,31 +72,32 @@ namespace TaskLibrary
         /// <param name="newTasks">New task array</param>
         public void AddTask(Task[] newTasks)
         {
-            tasks = newTasks.ToList();
+            foreach (var e in newTasks)
+            {
+                AddTask(e);
+            }
         }
 
         /// <summary>
         /// Wait for a task.
         /// </summary>
         /// <param name="task">Target task to wait</param>
-        /// <returns>True: task is finished, False: Wrong task</returns>
-        public bool WaitFor(Task task)
+        public void WaitFor(Task task)
         {
             if (!tasks.Contains(task))
             {
-                return false;
+                return;
             }
 
             task.Wait();
 
-            return true;
+            return;
         }
 
         /// <summary>
         /// Wait for a task having specific ID.
         /// </summary>
         /// <param name="id">Target task ID to wait</param>
-        /// <returns>True: task is finished, False: Wrong ID</returns>
         public bool Waitfor(int id)
         {
             var target = (from e in tasks
@@ -110,7 +117,6 @@ namespace TaskLibrary
         /// <summary>
         /// Wait for all tasks in the taskmanager.
         /// </summary>
-        /// <returns>True: All tasks are finished, False: No tasks</returns>
         public bool WaitForAll()
         {
             if(tasks.Count == 0)
@@ -120,7 +126,7 @@ namespace TaskLibrary
 
             while (isRunning)
             {
-                Thread.Sleep(10);
+                Task.Delay(10).Wait();
             }
 
             return true;
@@ -153,7 +159,7 @@ namespace TaskLibrary
                 CallFinishEvent(tasks[index]);
                 tasks.RemoveAt(index);
 
-                Thread.Sleep(10);
+                Task.Delay(10).Wait();
             }
 
             isRunning = false;
