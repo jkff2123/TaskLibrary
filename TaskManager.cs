@@ -22,8 +22,17 @@ namespace TaskLibrary
         public event EventHandler<TaskEventOnFinish> OnFinish;
 
         private bool disposed = false;
+        /// <summary>
+        /// Lazy initialization
+        /// </summary>
+        private static readonly Lazy<TaskManager> taskManager = new Lazy<TaskManager>(() => new TaskManager());
+        /// <summary>
+        /// Singletone instance
+        /// </summary>
+        public static TaskManager Instance { get { return taskManager.Value; } }
 
-        public TaskManager()
+
+        private TaskManager()
         {
             isRunning = false;
             tasks = new List<Task>();

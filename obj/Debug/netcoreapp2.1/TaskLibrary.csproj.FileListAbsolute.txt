@@ -16,3 +16,10 @@ S:\Repository\LibraryFactory\TaskManager\obj\Debug\netcoreapp2.1\TaskLibrary.Ass
 S:\Repository\LibraryFactory\TaskManager\obj\Debug\netcoreapp2.1\TaskLibrary.AssemblyInfo.cs
 S:\Repository\LibraryFactory\TaskManager\obj\Debug\netcoreapp2.1\TaskLibrary.dll
 S:\Repository\LibraryFactory\TaskManager\obj\Debug\netcoreapp2.1\TaskLibrary.pdb
+S:\Repository\LibraryFactory\TaskLibrary\bin\Debug\netcoreapp2.1\TaskLibrary.deps.json
+S:\Repository\LibraryFactory\TaskLibrary\bin\Debug\netcoreapp2.1\TaskLibrary.dll
+S:\Repository\LibraryFactory\TaskLibrary\bin\Debug\netcoreapp2.1\TaskLibrary.pdb
+S:\Repository\LibraryFactory\TaskLibrary\obj\Debug\netcoreapp2.1\TaskLibrary.AssemblyInfoInputs.cache
+S:\Repository\LibraryFactory\TaskLibrary\obj\Debug\netcoreapp2.1\TaskLibrary.AssemblyInfo.cs
+S:\Repository\LibraryFactory\TaskLibrary\obj\Debug\netcoreapp2.1\TaskLibrary.dll
+S:\Repository\LibraryFactory\TaskLibrary\obj\Debug\netcoreapp2.1\TaskLibrary.pdb

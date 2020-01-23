@@ -1,0 +1,9 @@
+S:\Repository\LibraryFactory\TaskLibrary\bin\Release\netcoreapp2.1\TaskLibrary.deps.json
+S:\Repository\LibraryFactory\TaskLibrary\bin\Release\netcoreapp2.1\TaskLibrary.dll
+S:\Repository\LibraryFactory\TaskLibrary\bin\Release\netcoreapp2.1\TaskLibrary.pdb
+S:\Repository\LibraryFactory\TaskLibrary\obj\Release\netcoreapp2.1\TaskLibrary.csprojAssemblyReference.cache
+S:\Repository\LibraryFactory\TaskLibrary\obj\Release\netcoreapp2.1\TaskLibrary.csproj.CoreCompileInputs.cache
+S:\Repository\LibraryFactory\TaskLibrary\obj\Release\netcoreapp2.1\TaskLibrary.AssemblyInfoInputs.cache
+S:\Repository\LibraryFactory\TaskLibrary\obj\Release\netcoreapp2.1\TaskLibrary.AssemblyInfo.cs
+S:\Repository\LibraryFactory\TaskLibrary\obj\Release\netcoreapp2.1\TaskLibrary.dll
+S:\Repository\LibraryFactory\TaskLibrary\obj\Release\netcoreapp2.1\TaskLibrary.pdb
