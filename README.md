@@ -1,7 +1,7 @@
 # TaskLibrary
  Task handing library
 # How to use
- 1. Make TaskManager instance.
+ 1. Get TaskManager instance. This is single tone pattern.
  2. Add event function in the event handler OnFinish
   ex) taskmanager.Onfinish += event;
  3. Make a Task instance and Add it to the Taskmanager instance. The task starts if it is not begun when it is added in the Taskmanager.
