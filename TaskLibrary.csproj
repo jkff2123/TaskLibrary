@@ -2,6 +2,20 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Authors>Jongkwan</Authors>
+    <Copyright>Jongkwan</Copyright>
+    <RepositoryUrl>https://github.com/jkff2123/TaskLibrary</RepositoryUrl>
+    <RepositoryType>Project</RepositoryType>
+    <PackageTags>Task</PackageTags>
+    <Description>Task management library</Description>
+    <SignAssembly>false</SignAssembly>
+    <PackageId>JK.TaskManager</PackageId>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <Version>1.1.0.0</Version>
+    <Product>TaskManager</Product>
+    <PackageReleaseNotes>Changed namespace
+TaskLibrary -&gt; JK.TaskLibrary</PackageReleaseNotes>
   </PropertyGroup>
 
 </Project>

@@ -5,10 +5,10 @@
   },
   "projects": {
     "S:\\Repository\\LibraryFactory\\TaskLibrary\\TaskLibrary.csproj": {
-      "version": "1.0.0",
+      "version": "1.1.0",
       "restore": {
         "projectUniqueName": "S:\\Repository\\LibraryFactory\\TaskLibrary\\TaskLibrary.csproj",
-        "projectName": "TaskLibrary",
+        "projectName": "JK.TaskManager",
         "projectPath": "S:\\Repository\\LibraryFactory\\TaskLibrary\\TaskLibrary.csproj",
         "packagesPath": "C:\\Users\\jkff2\\.nuget\\packages\\",
         "outputPath": "S:\\Repository\\LibraryFactory\\TaskLibrary\\obj\\",
@@ -57,7 +57,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.101\\RuntimeIdentifierGraph.json"
         }
       }
     }

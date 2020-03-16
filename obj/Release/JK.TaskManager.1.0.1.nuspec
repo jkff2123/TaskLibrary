@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>JK.TaskManager</id>
+    <version>1.0.1</version>
+    <authors>Jongkwan</authors>
+    <owners>Jongkwan</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <license type="expression">MIT</license>
+    <licenseUrl>https://licenses.nuget.org/MIT</licenseUrl>
+    <description>Task management library</description>
+    <releaseNotes>Changed name from TaskLibrary_Jongkwan</releaseNotes>
+    <copyright>Jongkwan</copyright>
+    <tags>Task</tags>
+    <repository type="Project" url="https://github.com/jkff2123/TaskLibrary" />
+    <dependencies>
+      <group targetFramework=".NETCoreApp3.1" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="S:\Repository\LibraryFactory\TaskLibrary\bin\Release\netcoreapp3.1\TaskLibrary.dll" target="lib\netcoreapp3.1\TaskLibrary.dll" />
+  </files>
+</package>

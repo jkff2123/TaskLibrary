@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Linq;
 
-namespace TaskLibrary
+namespace JK.TaskLibrary
 {
     public class TaskManager : IDisposable
     {
@@ -16,6 +17,10 @@ namespace TaskLibrary
         /// Running task list
         /// </summary>
         private List<Task> tasks;
+        /// <summary>
+        /// Cancelation tokens connected to the tasks
+        /// </summary>
+        private List<ConnectedCancellationTokenSource> cancellationTokenSources;
         /// <summary>
         /// Task finish event
         /// </summary>
@@ -36,6 +41,7 @@ namespace TaskLibrary
         {
             isRunning = false;
             tasks = new List<Task>();
+            cancellationTokenSources = new List<ConnectedCancellationTokenSource>();
         }
 
         /// <summary>
@@ -66,6 +72,18 @@ namespace TaskLibrary
         }
 
         /// <summary>
+        /// Add task with CancellationToken.
+        /// </summary>
+        /// <param name="newTask">New Task</param>
+        /// <param name="cancellationTokenSource">Cancelation token connected to the new task</param>
+        public void AddTask(Task newTask, CancellationTokenSource cancellationTokenSource)
+        {
+            AddTask(newTask);
+
+            cancellationTokenSources.Add(new ConnectedCancellationTokenSource(newTask, cancellationTokenSource));
+        }
+
+        /// <summary>
         /// Add task that has a result in the taskmanager.
         /// </summary>
         /// <typeparam name="T">Result type</typeparam>
@@ -73,6 +91,17 @@ namespace TaskLibrary
         public void AddTask<T>(Task<T> newTask)
         {
             AddTask(newTask as Task);
+        }
+
+        /// <summary>
+        /// Add task that has a result with CancellationToken.
+        /// </summary>
+        /// <typeparam name="T">Result type</typeparam>
+        /// <param name="newTask">New task item having result</param>
+        /// <param name="cancellationTokenSource">Cancelation token connected to the new task</param>
+        public void AddTask<T>(Task<T> newTask, CancellationTokenSource cancellationTokenSource)
+        {
+            AddTask(newTask as Task, cancellationTokenSource);
         }
 
         /// <summary>
@@ -84,6 +113,19 @@ namespace TaskLibrary
             foreach (var e in newTasks)
             {
                 AddTask(e);
+            }
+        }
+
+        /// <summary>
+        /// Add tasks having a result in the taskmanager.
+        /// </summary>
+        /// <typeparam name="T">Result type</typeparam>
+        /// <param name="newTasks">New task array</param>
+        public void AddTask<T>(Task<T>[] newTasks)
+        {
+            foreach (var e in newTasks)
+            {
+                AddTask(e as Task);
             }
         }
 
@@ -142,6 +184,30 @@ namespace TaskLibrary
         }
 
         /// <summary>
+        /// Cancel task process. Available only tasks added with CancellationTokenSource.
+        /// </summary>
+        /// <param name="task">Selected task</param>
+        /// <returns>False when there is no selected task.</returns>
+        public bool CancelTask(Task task)
+        {
+            if (task.IsCompleted)
+            {
+                return false;
+            }
+
+            var selectedToken = (from e in cancellationTokenSources where e.IsEqual(task) select e).FirstOrDefault();
+
+            if(selectedToken == null)
+            {
+                return false;
+            }
+
+            selectedToken.CancelConnectedTask();
+
+            return true;
+        }
+
+        /// <summary>
         /// Task finish event calling function.
         /// </summary>
         private void CallFinishEvent(Task finishedTask)
@@ -190,25 +256,43 @@ namespace TaskLibrary
 
             if (IsDisposing)
             {
-                foreach(var e in tasks)
+                foreach(var e in cancellationTokenSources)
                 {
-                    e.Dispose();
+                    e.CancelConnectedTask();
                 }
             }
 
             disposed = true;
         }
+
+        /// <summary>
+        /// CalcellationTokenSource storing class.
+        /// </summary>
+        private class ConnectedCancellationTokenSource
+        {
+            private readonly CancellationTokenSource cancellationTokenSource;
+            private readonly Task connectedTask;
+
+            public ConnectedCancellationTokenSource(Task task, CancellationTokenSource token)
+            {
+                connectedTask = task;
+                cancellationTokenSource = token;
+            }
+
+            public bool IsEqual(Task task)
+            {
+                if(connectedTask != task)
+                {
+                    return false;
+                }
+
+                return true;
+            }
+
+            public void CancelConnectedTask()
+            {
+                cancellationTokenSource.Cancel();
+            }
+        }
     }
-
-    //public class CancelableTask<T> : Task<T>
-    //{
-    //    private CancellationTokenSource tokenSource;
-    //    public CancellationTokenSource TokenSource { get { return tokenSource; } }
-
-    //    public CancelableTask(Func<T> function, CancellationTokenSource cancellationTokenSource)
-    //        : base(function, cancellationTokenSource.Token)
-    //    {
-    //        tokenSource = cancellationTokenSource;
-    //    }
-    //}
 }
